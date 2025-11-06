@@ -6,6 +6,7 @@ import { Image } from "react-native";
 import { View, Text } from "react-native";
 import PlotsOfLandScreen from "../screens/App/PlotsOfLand/PlotsOfLandScreen";
 import { useAuth } from "../context/AuthContext";
+import ProfileScreen from "../screens/App/Profile/ProfileScreen";
 
 const HeaderBG = require("../../assets/header-bg.png");
 
@@ -133,7 +134,7 @@ const AppTabs = () => {
       />
       <Tab.Screen
         name="ProfileScreen"
-        component={SignInScreen}
+        component={ProfileScreen}
         options={{ tabBarLabel: "Perfil" }}
       />
     </Tab.Navigator>
