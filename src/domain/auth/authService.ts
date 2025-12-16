@@ -5,7 +5,7 @@ import { AuthSignUpParams } from "./authTypes";
 
 export const register = async (signUpData: AuthSignUpParams): Promise<void> => {
   try {
-    const response = await api.post("/auth/register", {
+    await api.post("/auth/register", {
       name: signUpData.name,
       email: signUpData.email,
       password: signUpData.password,
@@ -13,6 +13,11 @@ export const register = async (signUpData: AuthSignUpParams): Promise<void> => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const verifyEmail = async (token: string) => {
+  const response = await api.get(`/auth/verify-email?token=${token}`);
+  return response.data;
 };
 
 export const login = async (email: string, password: string) => {
@@ -28,4 +33,4 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const authService = { login, register };
+export const authService = { login, register, verifyEmail };

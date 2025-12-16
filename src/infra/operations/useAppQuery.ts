@@ -5,20 +5,24 @@ type UseFetchDataReturn<DataT> = {
   isLoading: boolean;
   isPending: boolean;
   error: unknown;
+  isError: boolean;
 };
 
 type UseAppQueryParams<DataT> = {
   queryKey: (string | null | undefined | number)[];
   fetchData: () => Promise<DataT>;
+  enabled: boolean;
 };
 
 export function useAppQuery<DataT>({
   fetchData,
   queryKey,
+  enabled,
 }: UseAppQueryParams<DataT>): UseFetchDataReturn<DataT> {
-  const { data, isLoading, error, isPending } = useQuery({
+  const { data, isLoading, error, isPending, isError } = useQuery({
     queryKey,
     queryFn: fetchData,
+    enabled,
   });
 
   return {
@@ -26,5 +30,6 @@ export function useAppQuery<DataT>({
     isLoading,
     isPending,
     error,
+    isError,
   };
 }
