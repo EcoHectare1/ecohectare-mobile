@@ -91,7 +91,7 @@ const SignInScreen = () => {
         </TouchableOpacity>
 
         <TextLink
-          href={"verify-email"}
+          href={"sign-up"}
           text="Ainda não tem uma conta?"
           ctaText="Criar"
           colorText="gray2"

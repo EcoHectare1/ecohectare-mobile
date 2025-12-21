@@ -1,5 +1,6 @@
 import { Box, Text, TouchableOpacityBox } from "@components";
-import { router } from "expo-router";
+import { useAuthSignIn } from "@domain";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, TextInput } from "react-native";
 import { useVerifyEmail } from "src/domain/auth/operations/useVerifyEmail";
@@ -7,7 +8,11 @@ import { useVerifyEmail } from "src/domain/auth/operations/useVerifyEmail";
 const VerifyEmail = () => {
   const [code, setCode] = useState("");
   const inputRef = useRef<TextInput>(null);
-
+  const { mutate: signIn } = useAuthSignIn();
+  const { email, password } = useLocalSearchParams<{
+    email: string;
+    password: string;
+  }>();
   const { data, isLoading, isError, error } = useVerifyEmail(code);
 
   useEffect(() => {
@@ -19,9 +24,13 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     if (data) {
-      router.push("sign-in");
+      if (email && password) {
+        signIn({ email, password });
+      } else {
+        router.push("sign-in");
+      }
     }
-  }, [data, router]);
+  }, [data, router, email, password, signIn]);
 
   const handleTextChange = (text: string) => {
     const newCode = text.slice(0, 6);

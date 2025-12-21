@@ -1,13 +1,16 @@
 import { authService } from "../authService";
-import { useAppMutation, UseAppMutationOptions } from "@infra";
+import { useAppMutation } from "@infra";
 import { AuthSignUpParams } from "../authTypes";
 import { router } from "expo-router";
 
-export function useAuthSignUp(options?: UseAppMutationOptions<void>) {
+export function useAuthSignUp() {
   return useAppMutation<void, AuthSignUpParams>({
     mutationFn: (signUpData) => authService.register(signUpData),
-    onSuccess: () => {
-      router.push("verify-email");
+    onSuccess: (_data, variables) => {
+      router.push({
+        pathname: "verify-email",
+        params: { email: variables.email, password: variables.password },
+      });
     },
     onError: (error) => {
       console.error(error);
