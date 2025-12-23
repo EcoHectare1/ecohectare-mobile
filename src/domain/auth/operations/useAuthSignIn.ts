@@ -1,7 +1,7 @@
 import { useAuth } from "../AuthContext";
 import { authService } from "../authService";
-import { useAppMutation } from "../../../infra/operations/useAppMutation";
-import { AuthCredentials, AuthUser } from "../authTypes";
+import { useAppMutation } from "@infra";
+import { AuthCredentials } from "../authTypes";
 
 export function useAuthSignIn() {
   const { saveAuthUser } = useAuth();

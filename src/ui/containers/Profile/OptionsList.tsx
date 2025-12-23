@@ -1,9 +1,8 @@
 import React from "react";
-import { Box } from "../../components/Box";
 import { FlatList, ListRenderItemInfo } from "react-native";
-import { Button } from "../../components/Button";
+import { Button } from "@components";
 import { router } from "expo-router";
-import { useAppTheme } from "../../theme/useAppTheme";
+import { useAppTheme } from "@theme";
 
 type MenuItem = {
   id: string;
@@ -32,12 +31,6 @@ const settingsMenuItems: MenuItem[] = [
     title: "Language",
     link: "LanguageSettingsScreen",
     value: "Português",
-  },
-  {
-    id: "4",
-    iconName: "align-justify",
-    title: "App Settings",
-    link: "AppSettingsScreen",
   },
 ];
 

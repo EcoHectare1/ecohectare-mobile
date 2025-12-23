@@ -1,19 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 
 type UseAppMutationReturn<DataT, TVariables> = {
-  mutate: (variable: TVariables) => DataT | void;
+  mutate: (variable: TVariables) => void;
   isPending: boolean;
   error: unknown;
 };
 
-export type UseAppMutationOptions<TData> = {
-  onSuccess?: (data: TData) => void;
+export type UseAppMutationOptions<TData, TVariables> = {
+  onSuccess?: (data: TData, variables: TVariables) => void;
   onError?: (error: unknown) => void;
 };
 
 type UseAppMutationParams<TData, TVariables> = {
   mutationFn: (variable: TVariables) => Promise<TData>;
-} & UseAppMutationOptions<TData>;
+} & UseAppMutationOptions<TData, TVariables>;
 
 export function useAppMutation<TData, TVariables>({
   mutationFn,
@@ -23,9 +23,13 @@ export function useAppMutation<TData, TVariables>({
   TData,
   TVariables
 > {
-  const { isPending, error, mutate } = useMutation({
+  const { isPending, error, mutate } = useMutation<TData, Error, TVariables>({
     mutationFn,
-    onSuccess,
+    onSuccess: (data, variables) => {
+      if (onSuccess) {
+        onSuccess(data, variables);
+      }
+    },
     onError,
   });
 

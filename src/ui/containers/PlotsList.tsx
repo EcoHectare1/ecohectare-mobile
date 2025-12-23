@@ -1,67 +1,61 @@
 import React from "react";
-import { View, FlatList, ListRenderItemInfo } from "react-native";
-import { PlotsCard, PlotsCardProps } from "./PlotCard";
-
-const data = [
-  {
-    id: "1",
-    code: "A1",
-    title: "Loteamento Nhamundá",
-    subtitle: "Dona Auxiliadora",
-    lat: -3.4653,
-    lng: -62.2139,
-    price: 10.5,
-  },
-  {
-    id: "2",
-    code: "B2",
-    title: "Residencial Aruã",
-    subtitle: "Novo Horizonte",
-    lat: -2.9432,
-    lng: -60.1123,
-    price: 12.0,
-  },
-  {
-    id: "3",
-    code: "C3",
-    title: "Condomínio Monte Verde",
-    subtitle: "Centro",
-    lat: -3.1021,
-    lng: -59.9874,
-    price: 15.75,
-  },
-  {
-    id: "4",
-    code: "D4",
-    title: "Jardim das Palmeiras",
-    subtitle: "Bairro Sul",
-    lat: -3.2893,
-    lng: -60.7894,
-    price: 9.9,
-  },
-  {
-    id: "5",
-    code: "E5",
-    title: "Residencial Santa Rita",
-    subtitle: "Vila Esperança",
-    lat: -3.5567,
-    lng: -62.0012,
-    price: 11.3,
-  },
-];
+import { ActivityIndicator, FlatList, ListRenderItemInfo } from "react-native";
+import { PlotsCard } from "./PlotCard";
+import { Box, Text } from "@components";
+import { IHectare, useGetAllHectares } from "@domain";
 
 const PlotsList = () => {
-  function renderItem({ item }: ListRenderItemInfo<PlotsCardProps>) {
-    return <PlotsCard {...item} />;
+  const {
+    data: plotList,
+    isLoading,
+    isRefetching,
+    hasNextPage,
+    fetchNextPage,
+    refresh,
+    isFetchingNextPage,
+  } = useGetAllHectares(1);
+
+  function renderItem({ item }: ListRenderItemInfo<IHectare>) {
+    return <PlotsCard item={item} />;
+  }
+
+  function handleFetchNextPage() {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <Box flex={1} justifyContent="center" alignItems="center">
+        <ActivityIndicator size="large" />
+      </Box>
+    );
   }
 
   return (
     <FlatList
-      data={data}
-      keyExtractor={(_, idx) => idx.toString()}
+      data={(plotList as IHectare[]) || []}
+      keyExtractor={(item) => item._id}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 30, marginTop: 56 }}
+      contentContainerStyle={{ paddingBottom: 80, marginTop: 60 }}
       renderItem={renderItem}
+      onEndReached={handleFetchNextPage}
+      onEndReachedThreshold={0.1}
+      refreshing={isRefetching}
+      onRefresh={refresh}
+      ListEmptyComponent={
+        <Box alignItems="center" justifyContent="center">
+          <Text>Nenhum terreno encontrado.</Text>
+        </Box>
+      }
+      ListFooterComponent={
+        isFetchingNextPage ? (
+          <Box paddingVertical={"s24"}>
+            <ActivityIndicator size="large" />
+          </Box>
+        ) : null
+      }
     />
   );
 };

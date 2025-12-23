@@ -1,17 +1,13 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-
 import { useForm } from "react-hook-form";
 import { useAuthSignIn } from "../src/domain/auth/operations/useAuthSignIn";
 import { LoginFormData, loginSchema } from "../src/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Logo } from "../src/ui/containers/Logo";
 import { TextLink } from "../src/ui/containers/TextLink";
-
-import { useAppTheme } from "../src/ui/theme/useAppTheme";
-
-import { FormInput } from "../src/ui/components/FormInput";
+import { useAppTheme } from "@theme";
+import { FormInput } from "@components";
 
 const SignInBg = require("../assets/backgrounds/signin-bg.png");
 
