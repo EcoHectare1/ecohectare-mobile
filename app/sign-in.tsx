@@ -8,11 +8,13 @@ import { Logo } from "../src/ui/containers/Logo";
 import { TextLink } from "../src/ui/containers/TextLink";
 import { useAppTheme } from "@theme";
 import { FormInput } from "@components";
+import { useAuthGoogleSignIn } from "../src/domain/auth/operations/useAuthGoogleSignIn";
 
 const SignInBg = require("../assets/backgrounds/signin-bg.png");
 
 const SignInScreen = () => {
   const { mutate: signIn } = useAuthSignIn();
+  const { signIn: googleSignIn } = useAuthGoogleSignIn();
   const { colors } = useAppTheme();
 
   const {
@@ -87,6 +89,21 @@ const SignInScreen = () => {
             }}
           >
             {isSubmitting ? "Entrando..." : "Login"}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => googleSignIn()}
+          style={{
+            backgroundColor: colors.primary,
+            paddingVertical: 12,
+            borderRadius: 8,
+            alignItems: "center",
+            marginTop: 12,
+          }}
+        >
+          <Text style={{ color: "#fff", fontWeight: "700" }}>
+            Entrar com Google
           </Text>
         </TouchableOpacity>
 
