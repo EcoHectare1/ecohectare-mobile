@@ -10,6 +10,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   useKeepAwake();
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
