@@ -1,6 +1,7 @@
 import { createTheme } from "@shopify/restyle";
 
 const palette = {
+  black: "#000",
   mainGreen: "#18710D",
   darkBackground: "#050a05",
   secondaryGreen: "#55F041",

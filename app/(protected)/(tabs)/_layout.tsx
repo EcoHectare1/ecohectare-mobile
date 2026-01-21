@@ -29,13 +29,7 @@ export default function TabLayout() {
         },
         tabBarBackground: () => (
           <LinearGradient
-            colors={[
-              "rgb(158, 253, 150)",
-              "rgb(50, 145, 42)",
-              "rgb(24, 88, 21)",
-              "rgb(11, 49, 18) ",
-              "rgb(26, 92, 30) ",
-            ]}
+            colors={["rgb(50, 145, 42)", "rgb(24, 88, 21)"]}
             style={{
               borderTopLeftRadius: 30,
               borderTopRightRadius: 30,
