@@ -5,16 +5,17 @@ import { Screen } from "../../../src/ui/components/Screen";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetCart } from "../../../src/ui/containers/BottomSheetCart/BottomSheetCart";
 import MapView from "react-native-maps";
+import { BottomSheetMap } from "src/ui/containers/BottomSheetMap";
 const Bg = require("../../../assets/backgrounds/signin-bg.png");
 
 const PlotsOfLandScreen = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = ["75%"];
+  const snapPoints = ["100%"];
   const handleOpenPress = () => bottomSheetRef.current?.expand();
 
   return (
     <>
-      {/* <Image
+      <Image
         source={Bg}
         style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
         resizeMode="cover"
@@ -25,14 +26,18 @@ const PlotsOfLandScreen = () => {
         <PlotsList />
       </Screen>
 
-      <BottomSheetCart
+      {/* <BottomSheetCart
         ref={bottomSheetRef}
         snapPoints={snapPoints}
         index={-1}
         enablePanDownToClose
       /> */}
 
-      <MapView />
+      <BottomSheetMap
+        ref={bottomSheetRef}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+      />
     </>
   );
 };
