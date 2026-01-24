@@ -11,3 +11,10 @@ export interface IHectare {
     lng: number;
   };
 }
+
+export interface IHectareFull extends IHectare {
+  polygon: {
+    latitude: number;
+    longitude: number;
+  }[];
+}

@@ -75,7 +75,12 @@ export const BottomSheetMap = forwardRef<BottomSheet, BottomSheetMapProps>(
     };
 
     return (
-      <BottomSheet ref={ref} {...props} enableContentPanningGesture={false}>
+      <BottomSheet
+        ref={ref}
+        snapPoints={["94%"]}
+        {...props}
+        enableContentPanningGesture={false}
+      >
         <BottomSheetView>
           <View style={styles.mapContainer}>
             <MapView
@@ -94,22 +99,6 @@ export const BottomSheetMap = forwardRef<BottomSheet, BottomSheetMapProps>(
                 onPress={() => console.log("Polygon pressed!")}
               />
             </MapView>
-            {/* Floating Close Button */}
-            <TouchableOpacity
-              style={[
-                styles.closeButton,
-                {
-                  top: spacing.s24,
-                  right: spacing.s14,
-                  backgroundColor: colors.background,
-                },
-              ]}
-              onPress={handleClose}
-            >
-              <Text style={{ color: colors.text, fontWeight: "bold" }}>
-                Close
-              </Text>
-            </TouchableOpacity>
           </View>
         </BottomSheetView>
       </BottomSheet>

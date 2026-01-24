@@ -1,8 +1,7 @@
 import { Box, Icon, TouchableOpacityBox, Text } from "@components";
-import { useAppTheme } from "@theme";
-import React from "react";
 import { IHectare } from "@domain";
 import { useCartStore } from "src/store/useCartStore";
+import { useMapStore } from "src/store/useMapStore";
 
 export interface PlotsCardProps {
   code: string;
@@ -16,6 +15,11 @@ export interface PlotsCardProps {
 
 export function PlotsCard({ item }: { item: IHectare }) {
   const { addItem } = useCartStore();
+  const { selectHectare } = useMapStore();
+
+  const handleOpenPressMap = () => {
+    selectHectare(item._id);
+  };
 
   return (
     <Box
@@ -56,7 +60,17 @@ export function PlotsCard({ item }: { item: IHectare }) {
           </Text>
         </Box>
 
-        <Box width={90} height={90} backgroundColor="lightGray" m="s14" />
+        <TouchableOpacityBox
+          onPress={handleOpenPressMap}
+          width={90}
+          height={90}
+          backgroundColor="lightGray"
+          m="s14"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Icon name="map" size={40} color="primary" />
+        </TouchableOpacityBox>
       </Box>
 
       <TouchableOpacityBox

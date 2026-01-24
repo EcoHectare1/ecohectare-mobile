@@ -10,6 +10,9 @@ interface CartState {
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -18,13 +21,16 @@ export const useCartStore = create<CartState>()(
       items: [],
       totalItems: 0,
       totalPrice: 0,
+      isCartOpen: false,
+      openCart: () => set({ isCartOpen: true }),
+      closeCart: () => set({ isCartOpen: false }),
 
       addItem: (item) =>
         set((state) => {
           const exists = state.items.find((i) => i._id === item._id);
 
           if (exists) {
-            return state;
+            return { isCartOpen: true };
           }
 
           const newItems = [...state.items, item];
@@ -37,6 +43,7 @@ export const useCartStore = create<CartState>()(
             items: newItems,
             totalItems: newItems.length,
             totalPrice: newTotalPrice,
+            isCartOpen: true,
           };
         }),
 
@@ -55,7 +62,8 @@ export const useCartStore = create<CartState>()(
           };
         }),
 
-      clearCart: () => set({ items: [], totalItems: 0, totalPrice: 0 }),
+      clearCart: () =>
+        set({ items: [], totalItems: 0, totalPrice: 0, isCartOpen: false }),
     }),
     {
       name: "cart-storage",

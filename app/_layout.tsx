@@ -11,7 +11,9 @@ import { StyleSheet } from "react-native";
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
-  useKeepAwake();
+  if (!__DEV__) {
+    useKeepAwake();
+  }
 
   return (
     <GestureHandlerRootView style={styles.container}>
