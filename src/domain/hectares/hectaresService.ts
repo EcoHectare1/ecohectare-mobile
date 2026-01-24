@@ -12,6 +12,12 @@ export const getAllHectares = async (params: PageParams) => {
   return response.data;
 };
 
+export const getHectareById = async (id: string) => {
+  const response = await api.get(`/hectares/${id}`);
+  return response.data;
+};
+
 export const hectaresService = {
   getAllHectares,
+  getHectareById,
 };

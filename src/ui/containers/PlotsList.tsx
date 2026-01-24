@@ -38,7 +38,7 @@ const PlotsList = () => {
       data={(plotList as IHectare[]) || []}
       keyExtractor={(item) => item._id}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 80, marginTop: 60 }}
+      contentContainerStyle={{ paddingBottom: 80, marginTop: 10 }}
       renderItem={renderItem}
       onEndReached={handleFetchNextPage}
       onEndReachedThreshold={0.1}

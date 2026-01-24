@@ -1,8 +1,7 @@
-import { Icon } from "@components";
-import { useAppTheme } from "@theme";
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Box, Icon, TouchableOpacityBox, Text } from "@components";
 import { IHectare } from "@domain";
+import { useCartStore } from "src/store/useCartStore";
+import { useMapStore } from "src/store/useMapStore";
 
 export interface PlotsCardProps {
   code: string;
@@ -15,91 +14,76 @@ export interface PlotsCardProps {
 }
 
 export function PlotsCard({ item }: { item: IHectare }) {
-  const { colors } = useAppTheme();
+  const { addItem } = useCartStore();
+  const { selectHectare } = useMapStore();
+
+  const handleOpenPressMap = () => {
+    selectHectare(item._id);
+  };
 
   return (
-    <View style={[styles.container, { borderColor: colors.primary }]}>
-      <View style={styles.header}>
-        <View style={{ flex: 1, padding: 14 }}>
-          <Text style={styles.code}>{item.hectare_code}</Text>
-          <Text
-            style={[styles.title, { color: colors.primary, fontWeight: "600" }]}
-          >
+    <Box
+      backgroundColor="pureWhite"
+      borderWidth={2}
+      borderRadius="default"
+      shadowColor="black"
+      shadowOpacity={0.1}
+      shadowRadius={4}
+      shadowOffset={{ width: 0, height: 2 }}
+      overflow="hidden"
+      mb="s12"
+      borderColor="primary"
+    >
+      <Box
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Box flex={1} p="s14">
+          <Text height={30} fontSize={30} fontWeight={"700"} color={"primary"}>
+            {item.hectare_code}
+          </Text>
+          <Text fontSize={16} fontWeight={"600"} color="primary">
             <Icon name={"tree"} size={14} color="secondary" />
             {"   "}
             {item.land_plot_id.name.split(" - ")[1].trim()}
           </Text>
 
-          <Text style={styles.coordinates}>
+          <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            Lat: {item.coordinates.lat.toFixed(4)}, Lng:{" "}
-            {item.coordinates.lng.toFixed(4)}
+            Lat: {item.coordinates.lat.toFixed(4)}
           </Text>
-        </View>
-      </View>
 
-      <TouchableOpacity
-        style={[styles.footer, { backgroundColor: colors.primary }]}
+          <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
+            <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
+            Lng: {item.coordinates.lng.toFixed(4)}
+          </Text>
+        </Box>
+
+        <TouchableOpacityBox
+          onPress={handleOpenPressMap}
+          width={90}
+          height={90}
+          backgroundColor="lightGray"
+          m="s14"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Icon name="map" size={40} color="primary" />
+        </TouchableOpacityBox>
+      </Box>
+
+      <TouchableOpacityBox
+        paddingVertical="s8"
+        alignItems="center"
+        justifyContent="center"
+        backgroundColor="primary"
+        onPress={() => addItem(item)}
       >
-        <Text style={styles.footerText}>
+        <Text color="pureWhite" fontWeight="600" fontSize={14}>
           Locar por R$ {item.value.toFixed(2)}/mês
         </Text>
-      </TouchableOpacity>
-    </View>
+      </TouchableOpacityBox>
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderRadius: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-
-    overflow: "hidden",
-    marginBottom: 12,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  code: {
-    fontSize: 32,
-    fontWeight: "700",
-    color: "#15803d", // verde escuro
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  subtitle: {
-    fontSize: 12,
-    color: "#6b7280",
-  },
-  coordinates: {
-    fontSize: 16,
-    color: "#9ca3af",
-    marginTop: 4,
-  },
-  iconContainer: {
-    width: 44,
-    height: 44,
-    backgroundColor: "#22c55e", // verde claro
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footer: {
-    paddingVertical: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footerText: {
-    color: "#fff",
-    fontWeight: "600",
-    fontSize: 14,
-  },
-});
