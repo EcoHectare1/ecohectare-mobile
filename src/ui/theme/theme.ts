@@ -1,7 +1,9 @@
 import { createTheme } from "@shopify/restyle";
 
 const palette = {
+  black: "#000",
   mainGreen: "#18710D",
+  darkBackground: "#050a05",
   secondaryGreen: "#55F041",
   lightGreen: "#c7fec0",
   charcoalGrey: "#302E2D",
@@ -26,6 +28,7 @@ const theme = createTheme({
   colors: {
     primary: palette.mainGreen,
     secondary: palette.secondaryGreen,
+    background: palette.transparent,
     text: palette.pureWhite,
     gray1: palette.charcoalGrey,
     gray2: palette.stoneGrey,
@@ -46,7 +49,7 @@ const theme = createTheme({
     s40: 40,
     s48: 48,
     s56: 56,
-    padding: 24, // default
+    padding: 24,
   },
   textVariants: {
     defaults: {

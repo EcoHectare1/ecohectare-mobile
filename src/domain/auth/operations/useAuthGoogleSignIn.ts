@@ -8,7 +8,7 @@ import { AuthUser } from "..";
 WebBrowser.maybeCompleteAuthSession();
 
 const discovery = {
-  authorizationEndpoint: `${api.defaults.baseURL}/auth/google`,
+  authorizationEndpoint: `${process.env.EXPO_PUBLIC_API_PRODUCTION_URL}/auth/google`,
 };
 
 export function useAuthGoogleSignIn() {
