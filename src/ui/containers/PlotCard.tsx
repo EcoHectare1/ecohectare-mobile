@@ -14,8 +14,10 @@ export interface PlotsCardProps {
 }
 
 export function PlotsCard({ item }: { item: IHectare }) {
-  const { addItem } = useCartStore();
+  const { addItem, items } = useCartStore();
   const { selectHectare } = useMapStore();
+
+  const isInCart = items.find((cartItem) => cartItem._id === item._id);
 
   const handleOpenPressMap = () => {
     selectHectare(item._id);
@@ -39,8 +41,8 @@ export function PlotsCard({ item }: { item: IHectare }) {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Box flex={1} p="s14">
-          <Text height={30} fontSize={30} fontWeight={"700"} color={"primary"}>
+        <Box p="s14" gap="s10">
+          <Text fontSize={24} fontWeight={"800"} color="primary">
             {item.hectare_code}
           </Text>
           <Text fontSize={16} fontWeight={"600"} color="primary">
@@ -77,11 +79,13 @@ export function PlotsCard({ item }: { item: IHectare }) {
         paddingVertical="s8"
         alignItems="center"
         justifyContent="center"
-        backgroundColor="primary"
+        backgroundColor={isInCart ? "fbInfoSurface" : "primary"}
         onPress={() => addItem(item)}
       >
         <Text color="pureWhite" fontWeight="600" fontSize={14}>
-          Locar por R$ {item.value.toFixed(2)}/mês
+          {isInCart
+            ? "No Carrinho"
+            : `Locar por R$ ${item.value.toFixed(2)}/mês`}
         </Text>
       </TouchableOpacityBox>
     </Box>

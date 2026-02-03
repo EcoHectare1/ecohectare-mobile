@@ -23,9 +23,10 @@ const buttonColors: Record<
 };
 
 type ButtonProps = TouchableOpacityBoxProps & {
-  icon: any;
+  icon?: any;
+  textColor: string;
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   variant?: ButtonVariant;
 };
 
@@ -33,27 +34,33 @@ export function Button({
   icon,
   title,
   onPress,
+  textColor,
   variant = "primary",
   ...toProps
 }: ButtonProps) {
-  const buttonProps = buttonColors[variant];
   return (
     <TouchableOpacityBox
       {...toProps}
       onPress={onPress}
-      backgroundColor={buttonProps.backgroundColor}
       flexDirection="row"
-      borderRadius="default"
-      padding="s16"
+      borderRadius="small"
+      padding="s10"
       alignItems="center"
       gap="s16"
     >
       {icon ? (
-        <Box backgroundColor="lightGreen" padding="s10" borderRadius="rounded">
+        <Box
+          backgroundColor="lightGreen"
+          justifyContent="center"
+          alignItems="center"
+          height={50}
+          width={50}
+          borderRadius="rounded"
+        >
           <Icon name={icon ? icon : ""} color="primary" />
         </Box>
       ) : null}
-      <Text color={buttonProps.textColor}>{title}</Text>
+      <Text style={{ color: textColor }}>{title}</Text>
     </TouchableOpacityBox>
   );
 }
