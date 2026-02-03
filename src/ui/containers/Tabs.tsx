@@ -1,7 +1,7 @@
 import { Box, TouchableOpacityBox, Text } from "@components";
 import { useAppTheme } from "@theme";
 import React, { useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Image } from "react-native";
 
 const { width } = Dimensions.get("window");
 const TABS = ["EVI", "NDVI", "SAVI"];
@@ -9,6 +9,8 @@ const TABS = ["EVI", "NDVI", "SAVI"];
 export const Tabs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const { colors } = useAppTheme();
+
+  const EOS = require("../../../assets/images/eos-mock.jpeg");
 
   return (
     <Box mt="s32" flexDirection="column" gap="s16">
@@ -18,7 +20,14 @@ export const Tabs = () => {
         borderWidth={1}
         borderColor="primary"
         borderRadius="default"
-      ></Box>
+        overflow="hidden"
+      >
+        <Image
+          source={EOS}
+          style={{ width: "100%", height: "100%" }}
+          resizeMode="cover"
+        />
+      </Box>
       <Box
         flexDirection="row"
         justifyContent="space-between"

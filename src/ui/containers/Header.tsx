@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <Box paddingTop="s24" flexDirection="column" gap="s4">
       <Text color="primary" fontSize={22} fontWeight={"800"}>
-        Olá, {authData?.user.name}
+        Olá, {authData?.user.name?.split(" ")[0]}
       </Text>
       <Text color="primary" fontSize={14} fontWeight={"900"}>
         <Text color="fbSuccessSurface">2 Lotes</Text> Preservados

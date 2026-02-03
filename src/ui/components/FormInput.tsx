@@ -1,9 +1,12 @@
 import React from "react";
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput } from "react-native";
+import { Text } from "./Text";
 import { Controller } from "react-hook-form";
 
 type Props = {
+  disabled?: boolean;
   control: any;
+  label?: string;
   name: string;
   placeholder?: string;
   secureTextEntry?: boolean;
@@ -16,6 +19,7 @@ type Props = {
 
 export function FormInput({
   control,
+  label,
   name,
   placeholder,
   secureTextEntry,
@@ -30,13 +34,18 @@ export function FormInput({
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <View style={{ marginBottom: 12 }}>
+          {label && (
+            <Text fontWeight={"800"} padding="s4" style={{ color: textColor }}>
+              {label}
+            </Text>
+          )}
           <TextInput
             style={{
               borderWidth: 1,
               borderColor: error ? "red" : borderColor,
               backgroundColor,
               borderRadius: 8,
-              padding: 14,
+              padding: 10,
               color: textColor,
             }}
             placeholder={placeholder}

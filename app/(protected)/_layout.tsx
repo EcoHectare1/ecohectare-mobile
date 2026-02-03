@@ -16,19 +16,18 @@ export default function ProtectedLayout() {
   }
 
   return (
-    <ImageBackground source={bg} style={styles.container}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          fullScreenGestureEnabled: true,
-          contentStyle: {
-            backgroundColor: "transparent",
-          },
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-      </Stack>
-    </ImageBackground>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        fullScreenGestureEnabled: true,
+        animation: "slide_from_bottom",
+        contentStyle: {
+          backgroundColor: "transparent",
+        },
+      }}
+    >
+      <Stack.Screen name="(tabs)" />
+    </Stack>
   );
 }
 
