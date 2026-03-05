@@ -1,0 +1,77 @@
+{
+  "common": {
+    "email": "E-mail",
+    "name": "Name",
+    "password": "Password",
+    "cancel": "Cancel",
+    "confirm_password": "Confirm password",
+    "lat": "Lat",
+    "lng": "Lng"
+  },
+  "sign_in": {
+    "submitting": "Signing in...",
+    "submit": "Sign in",
+    "google_sign_in": "Sign in with Google",
+    "no_account": "Don't have an account yet?",
+    "create": "Create"
+  },
+  "sign_up": {
+    "submitting": "Registering...",
+    "submit": "Sign up",
+    "has_account": "Already have an account?",
+    "sign_in": "Sign in"
+  },
+  "verify_email": {
+    "title": "Verify your email",
+    "description": "A verification code was sent to your email",
+    "invalid_code": "Invalid code"
+  },
+  "cart": {
+    "title": "Support cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "items": "items",
+    "item": "item",
+    "continue": "Continue",
+    "plot": "Plot"
+  },
+  "account_management": {
+    "title": "Account management",
+    "subtitle": "Manage your personal and security information.",
+    "personal_info": "Personal information",
+    "personal_info_subtitle": "Your basic profile information",
+    "change_password": "Change password",
+    "change_password_subtitle": "Leave blank to keep unchanged. Changing the password will sign you out of other sessions.",
+    "new_password": "New password",
+    "confirm_new_password": "Confirm new password",
+    "logout": "Sign out",
+    "logout_subtitle": "You will need to sign in again after logging out",
+    "logout_confirm": "Are you sure you want to sign out?"
+  },
+  "language_settings": {
+    "title": "Language",
+    "subtitle": "Select the app language."
+  },
+  "tabs": {
+    "home": "Home",
+    "plots": "Plots",
+    "profile": "Profile"
+  },
+  "home": {
+    "greeting": "Hello, {{name}}",
+    "preserved": "Preserved",
+    "sponsored_plots": "Sponsored Plots",
+    "sponsored": "Sponsored"
+  },
+  "plots": {
+    "remove_from_cart": "Remove from Cart",
+    "acquire": "Acquire for ${{price}}/month",
+    "none_found": "No plots found.",
+    "plot": "Plot"
+  },
+  "profile": {
+    "my_certificates": "My certificates",
+    "account_management": "Account management",
+    "language": "Language"
+  }
+}

@@ -1,6 +1,7 @@
 import { Box, Icon, Text, TouchableOpacityBox } from "@components";
 import { IHectare } from "@domain";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useCartStore } from "src/store/useCartStore";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -12,6 +13,7 @@ export const CartItem = ({
   value,
 }: IHectare) => {
   const { removeItem } = useCartStore();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -36,7 +38,7 @@ export const CartItem = ({
         </Box>
         <Box flexDirection="column" gap="s14">
           <Text color="black" fontSize={20} fontWeight={"700"}>
-            Lote {hectare_code}
+            {t("cart.plot")} {hectare_code}
           </Text>
 
           <Text color="primary" fontSize={14} fontWeight={"400"}>
@@ -51,12 +53,12 @@ export const CartItem = ({
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            Lat: {coordinates.lat.toFixed(4)}
+            {t("common.lat")}: {coordinates.lat.toFixed(4)}
           </Text>
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            Lng: {coordinates.lng.toFixed(4)}
+            {t("common.lng")}: {coordinates.lng.toFixed(4)}
           </Text>
         </Box>
       </Box>

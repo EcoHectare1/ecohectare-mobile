@@ -16,7 +16,7 @@ export function useAuthSignIn() {
       saveAuthUser(auth);
     },
 
-    onError: (error) => console.error(error),
+    onError: (error) => console.log("Something goes wrong", error),
   });
 
   return {

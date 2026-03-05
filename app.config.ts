@@ -1,10 +1,10 @@
 module.exports = {
-  name: "ecohectare-mobile",
+  name: "Ecohectare",
   slug: "ecohectare-mobile",
   version: "1.0.0",
   scheme: "ecohectaremobile",
   orientation: "portrait",
-  icon: "./assets/images/icon.png",
+  icon: "./assets/images/icon-ecohectare.png",
   userInterfaceStyle: "light",
   newArchEnabled: true,
   splash: {
@@ -19,7 +19,7 @@ module.exports = {
   android: {
     package: "com.anonymous.ecohectaremobile",
     adaptiveIcon: {
-      foregroundImage: "./assets/images/adaptive-icon.png",
+      foregroundImage: "./assets/images/icon-ecohectare.png",
       backgroundColor: "#ffffff",
     },
     edgeToEdgeEnabled: true,

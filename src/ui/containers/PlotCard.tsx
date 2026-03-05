@@ -1,5 +1,6 @@
 import { Box, Icon, TouchableOpacityBox, Text } from "@components";
 import { IHectare } from "@domain";
+import { useTranslation } from "react-i18next";
 import { useCartStore } from "src/store/useCartStore";
 import { useMapStore } from "src/store/useMapStore";
 
@@ -14,8 +15,9 @@ export interface PlotsCardProps {
 }
 
 export function PlotsCard({ item }: { item: IHectare }) {
-  const { addItem, items } = useCartStore();
+  const { addItem, items, removeItem } = useCartStore();
   const { selectHectare } = useMapStore();
+  const { t } = useTranslation();
 
   const isInCart = items.find((cartItem) => cartItem._id === item._id);
 
@@ -53,12 +55,12 @@ export function PlotsCard({ item }: { item: IHectare }) {
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            Lat: {item.coordinates.lat.toFixed(4)}
+            {t("common.lat")}: {item.coordinates.lat.toFixed(4)}
           </Text>
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            Lng: {item.coordinates.lng.toFixed(4)}
+            {t("common.lng")}: {item.coordinates.lng.toFixed(4)}
           </Text>
         </Box>
 
@@ -80,12 +82,12 @@ export function PlotsCard({ item }: { item: IHectare }) {
         alignItems="center"
         justifyContent="center"
         backgroundColor={isInCart ? "fbInfoSurface" : "primary"}
-        onPress={() => addItem(item)}
+        onPress={() => (isInCart ? removeItem(item._id) : addItem(item))}
       >
         <Text color="pureWhite" fontWeight="600" fontSize={14}>
           {isInCart
-            ? "No Carrinho"
-            : `Locar por R$ ${item.value.toFixed(2)}/mês`}
+            ? t("plots.remove_from_cart")
+            : t("plots.acquire", { price: item.value.toFixed(2) })}
         </Text>
       </TouchableOpacityBox>
     </Box>

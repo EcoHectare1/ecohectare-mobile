@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, ListRenderItemInfo } from "react-native";
 import { PlotsCard } from "./PlotCard";
 import { Box, Text } from "@components";
 import { IHectare, useGetAllHectares } from "@domain";
+import { useTranslation } from "react-i18next";
 
 const PlotsList = () => {
   const {
@@ -14,6 +15,7 @@ const PlotsList = () => {
     refresh,
     isFetchingNextPage,
   } = useGetAllHectares(1);
+  const { t } = useTranslation();
 
   function renderItem({ item }: ListRenderItemInfo<IHectare>) {
     return <PlotsCard item={item} />;
@@ -46,7 +48,7 @@ const PlotsList = () => {
       onRefresh={refresh}
       ListEmptyComponent={
         <Box alignItems="center" justifyContent="center">
-          <Text>Nenhum terreno encontrado.</Text>
+        <Text>{t("plots.none_found")}</Text>
         </Box>
       }
       ListFooterComponent={

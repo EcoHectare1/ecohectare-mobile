@@ -1,6 +1,7 @@
 import { Box, Text } from "@components";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export interface PlotItemProps {
   code: string;
@@ -11,6 +12,7 @@ export interface PlotItemProps {
 }
 
 const PlotItem = ({ code, title, subtitle, lat, lng }: PlotItemProps) => {
+  const { t } = useTranslation();
   return (
     <Box
       overflow="hidden"
@@ -34,7 +36,7 @@ const PlotItem = ({ code, title, subtitle, lat, lng }: PlotItemProps) => {
         </Box>
         <Box>
           <Text color="charcoalGrey" fontSize={14} fontWeight={"800"}>
-            Lote {code} - {title}
+            {t("plots.plot")} {code} - {title}
           </Text>
           <Text color="stoneGrey" fontSize={12} fontWeight={"800"}>
             {lat}, {lng}
@@ -49,7 +51,7 @@ const PlotItem = ({ code, title, subtitle, lat, lng }: PlotItemProps) => {
           fontSize={14}
           fontWeight={"800"}
         >
-          Apadrinhado
+          {t("home.sponsored")}
         </Text>
       </Box>
     </Box>

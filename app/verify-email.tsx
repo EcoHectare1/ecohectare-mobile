@@ -3,12 +3,14 @@ import { useAuthSignIn } from "@domain";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, TextInput } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useVerifyEmail } from "src/domain/auth/operations/useVerifyEmail";
 
 const VerifyEmail = () => {
   const [code, setCode] = useState("");
   const inputRef = useRef<TextInput>(null);
   const { mutate: signIn } = useAuthSignIn();
+  const { t } = useTranslation();
   const { email, password } = useLocalSearchParams<{
     email: string;
     password: string;
@@ -25,7 +27,9 @@ const VerifyEmail = () => {
   useEffect(() => {
     if (data) {
       if (email && password) {
-        signIn({ email, password });
+        setTimeout(() => {
+          signIn({ email, password });
+        }, 1000);
       } else {
         router.push("sign-in");
       }
@@ -41,10 +45,10 @@ const VerifyEmail = () => {
   return (
     <Box flex={1} justifyContent="center" paddingHorizontal="s24" gap="s4">
       <Text textAlign="center" color="gray1" fontWeight={"600"} fontSize={16}>
-        Verifique seu email
+        {t("verify_email.title")}
       </Text>
       <Text textAlign="center" color="gray2" fontWeight={"600"} fontSize={14}>
-        Foi enviado um código de verificação ao seu email
+        {t("verify_email.description")}
       </Text>
       <Box justifyContent="center" alignContent="center" marginVertical="s20">
         <Box flexDirection={"row"} justifyContent="center" gap="s12">
@@ -85,7 +89,7 @@ const VerifyEmail = () => {
 
         {isError && (
           <Text style={styles.errorText}>
-            {(error as any)?.message || "Invalid code"}
+            {(error as any)?.message || t("verify_email.invalid_code")}
           </Text>
         )}
 

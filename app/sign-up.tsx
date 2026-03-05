@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -17,8 +18,8 @@ const SignUpBg = require("../assets/backgrounds/signup-bg.png");
 
 const SignUpScreen = () => {
   const { mutate: signUp } = useAuthSignUp();
-
   const router = useRouter();
+  const { t } = useTranslation();
 
   const {
     control,
@@ -58,7 +59,7 @@ const SignUpScreen = () => {
         <FormInput
           control={control}
           name="name"
-          placeholder="Nome"
+          placeholder={t("common.name")}
           backgroundColor="#253A22"
           borderColor="#1CFF00"
           placeholderColor="#ffff"
@@ -67,7 +68,7 @@ const SignUpScreen = () => {
         <FormInput
           control={control}
           name="email"
-          placeholder="E-mail"
+          placeholder={t("common.email")}
           backgroundColor="#253A22"
           borderColor="#1CFF00"
           placeholderColor="#ffff"
@@ -76,7 +77,7 @@ const SignUpScreen = () => {
         <FormInput
           control={control}
           name="password"
-          placeholder="Senha"
+          placeholder={t("common.password")}
           secureTextEntry
           backgroundColor="#253A22"
           borderColor="#1CFF00"
@@ -86,7 +87,7 @@ const SignUpScreen = () => {
         <FormInput
           control={control}
           name="confirmPassword"
-          placeholder="Confirmar senha"
+          placeholder={t("common.confirm_password")}
           secureTextEntry
           backgroundColor="#253A22"
           borderColor="#1CFF00"
@@ -111,15 +112,15 @@ const SignUpScreen = () => {
               fontWeight: "700",
             }}
           >
-            {isSubmitting ? "Cadastrando..." : "Cadastre-se"}
+            {isSubmitting ? t("sign_up.submitting") : t("sign_up.submit")}
           </Text>
         </TouchableOpacity>
 
         <TextLink
           colorText="pureWhite"
           href={"/sign-in"}
-          text="Já possui uma conta?"
-          ctaText="Entrar"
+          text={t("sign_up.has_account")}
+          ctaText={t("sign_up.sign_in")}
         />
       </View>
     </View>

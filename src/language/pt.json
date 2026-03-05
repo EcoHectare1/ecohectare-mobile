@@ -1,0 +1,77 @@
+{
+  "common": {
+    "email": "E-mail",
+    "name": "Nome",
+    "password": "Senha",
+    "cancel": "Cancelar",
+    "confirm_password": "Confirmar senha",
+    "lat": "Lat",
+    "lng": "Lng"
+  },
+  "sign_in": {
+    "submitting": "Entrando...",
+    "submit": "Entrar",
+    "google_sign_in": "Entrar com Google",
+    "no_account": "Ainda não tem uma conta?",
+    "create": "Criar"
+  },
+  "sign_up": {
+    "submitting": "Cadastrando...",
+    "submit": "Cadastre-se",
+    "has_account": "Já possui uma conta?",
+    "sign_in": "Entrar"
+  },
+  "verify_email": {
+    "title": "Verifique seu email",
+    "description": "Foi enviado um código de verificação ao seu email",
+    "invalid_code": "Código inválido"
+  },
+  "cart": {
+    "title": "Carrinho de apoio",
+    "empty": "Seu carrinho está vazio",
+    "total": "Total",
+    "items": "itens",
+    "item": "item",
+    "continue": "Continuar",
+    "plot": "Lote"
+  },
+  "account_management": {
+    "title": "Gerenciamento de conta",
+    "subtitle": "Gerencie suas informações pessoais e de segurança.",
+    "personal_info": "Informações pessoais",
+    "personal_info_subtitle": "Suas informações básicas de perfil",
+    "change_password": "Alterar Senha",
+    "change_password_subtitle": "Deixe em branco para não alterar. Alterar a senha irá desconectá-lo de outras sessões.",
+    "new_password": "Nova senha",
+    "confirm_new_password": "Confirmar nova senha",
+    "logout": "Sair",
+    "logout_subtitle": "Ao sair, você precisará fazer login novamente",
+    "logout_confirm": "Tem certeza que deseja sair?"
+  },
+  "language_settings": {
+    "title": "Idioma",
+    "subtitle": "Selecione o idioma do aplicativo."
+  },
+  "tabs": {
+    "home": "Início",
+    "plots": "Lotes",
+    "profile": "Perfil"
+  },
+  "home": {
+    "greeting": "Olá, {{name}}",
+    "preserved": "Preservados",
+    "sponsored_plots": "Lotes Apadrinhados",
+    "sponsored": "Apadrinhado"
+  },
+  "plots": {
+    "remove_from_cart": "Remover do Carrinho",
+    "acquire": "Adquirir por R$ {{price}}/mês",
+    "none_found": "Nenhum terreno encontrado.",
+    "plot": "Lote"
+  },
+  "profile": {
+    "my_certificates": "Meus certificados",
+    "account_management": "Gerenciamento de conta",
+    "language": "Idioma"
+  }
+}
