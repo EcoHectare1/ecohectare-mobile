@@ -5,6 +5,7 @@ import { useAuth } from "src/domain/auth/AuthContext";
 
 export const Header = () => {
   const { authData } = useAuth();
+
   const { t } = useTranslation();
 
   return (

@@ -88,7 +88,9 @@ const Cart = () => {
           </Text>
           <Text color="primary" fontWeight={"700"} fontSize={20}>
             ${totalPrice.toFixed(2)}{" "}
-            <Text color="gray2">/ {items.length > 1 ? t("cart.items") : t("cart.item")}</Text>
+            <Text color="gray2">
+              / {items.length > 1 ? t("cart.items") : t("cart.item")}
+            </Text>
           </Text>
         </Box>
 

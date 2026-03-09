@@ -11,6 +11,8 @@ import { useAppTheme } from "@theme";
 import { Box, FormInput, Screen } from "@components";
 import { useAuthGoogleSignIn } from "../src/domain/auth/operations/useAuthGoogleSignIn";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FormPasswordInput } from "src/ui/components/FormPasswordInput";
+import { FormTextInput } from "src/ui/components/FormTextInput";
 
 const SignInBg = require("../assets/backgrounds/signin-bg.png");
 
@@ -43,25 +45,25 @@ const SignInScreen = () => {
         <SafeAreaView style={{ paddingTop: 100 }}>
           <Logo />
 
-          <FormInput
+          <FormTextInput
             control={control}
             name="email"
-            placeholder={t("common.email")}
-            borderColor={colors.primary}
-            backgroundColor="#E8FDE6"
-            placeholderColor={colors.gray1}
-            textColor={colors.gray1}
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            backgroundColor="lightGreen"
+            borderColor="primary"
+            labelColor="primary"
+            boxProps={{ mb: "s20" }}
           />
 
-          <FormInput
+          <FormPasswordInput
             control={control}
+            label="Password"
             name="password"
             placeholder={t("common.password")}
-            secureTextEntry
-            borderColor={colors.primary}
-            backgroundColor="#E8FDE6"
-            placeholderColor={colors.gray1}
-            textColor={colors.gray1}
+            borderColor="primary"
+            backgroundColor="lightGreen"
+            labelColor="primary"
           />
 
           <TouchableOpacity

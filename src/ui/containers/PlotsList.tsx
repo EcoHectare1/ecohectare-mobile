@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ActivityIndicator, FlatList, ListRenderItemInfo } from "react-native";
 import { PlotsCard } from "./PlotCard";
 import { Box, Text } from "@components";
 import { IHectare, useGetAllHectares } from "@domain";
 import { useTranslation } from "react-i18next";
+import { useDebounce } from "src/hooks/useDebounce";
 
-const PlotsList = () => {
+interface PlotsListProps {
+  searchQuery?: string;
+}
+
+const PlotsList = ({ searchQuery }: PlotsListProps) => {
+  const debouncedSearch = useDebounce(searchQuery);
+
   const {
     data: plotList,
     isLoading,
@@ -14,7 +21,8 @@ const PlotsList = () => {
     fetchNextPage,
     refresh,
     isFetchingNextPage,
-  } = useGetAllHectares(1);
+  } = useGetAllHectares(debouncedSearch);
+
   const { t } = useTranslation();
 
   function renderItem({ item }: ListRenderItemInfo<IHectare>) {
@@ -29,7 +37,7 @@ const PlotsList = () => {
 
   if (isLoading) {
     return (
-      <Box flex={1} justifyContent="center" alignItems="center">
+      <Box justifyContent="center" alignItems="center" height={500}>
         <ActivityIndicator size="large" />
       </Box>
     );
@@ -47,8 +55,10 @@ const PlotsList = () => {
       refreshing={isRefetching}
       onRefresh={refresh}
       ListEmptyComponent={
-        <Box alignItems="center" justifyContent="center">
-        <Text>{t("plots.none_found")}</Text>
+        <Box height={500} alignItems="center" justifyContent="center">
+          <Text color="primary" fontSize={20}>
+            {t("plots.none_found")}
+          </Text>
         </Box>
       }
       ListFooterComponent={

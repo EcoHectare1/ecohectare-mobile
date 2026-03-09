@@ -7,11 +7,10 @@ export function useAuthSignUp() {
   return useAppMutation<void, AuthSignUpParams>({
     mutationFn: (signUpData) => authService.register(signUpData),
     onSuccess: (_data, variables) => {
-      router.push("sign-in");
-      // router.push({
-      //   pathname: "verify-email",
-      //   params: { email: variables.email, password: variables.password },
-      // });
+      router.push({
+        pathname: "verify-email",
+        params: { email: variables.email, password: variables.password },
+      });
     },
     onError: (error) => {
       console.error(error);

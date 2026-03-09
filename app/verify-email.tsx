@@ -27,9 +27,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     if (data) {
       if (email && password) {
-        setTimeout(() => {
-          signIn({ email, password });
-        }, 1000);
+        signIn({ email, password });
       } else {
         router.push("sign-in");
       }

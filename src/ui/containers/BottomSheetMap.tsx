@@ -121,7 +121,6 @@ export const BottomSheetMap = forwardRef<BottomSheet, BottomSheetMapProps>(
                 strokeColor="#228B22"
                 strokeWidth={3}
                 tappable={true}
-                onPress={() => console.log("Polygon pressed!")}
               />
 
               {propertyBoundaries.map((boundary, index) => (

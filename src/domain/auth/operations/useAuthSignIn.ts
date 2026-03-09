@@ -2,9 +2,11 @@ import { useAuth } from "../AuthContext";
 import { authService } from "../authService";
 import { useAppMutation } from "@infra";
 import { AuthCredentials } from "../authTypes";
+import { useToastStore } from "src/store/useToastStore";
 
 export function useAuthSignIn() {
   const { saveAuthUser } = useAuth();
+  const { show } = useToastStore();
 
   const { mutate, isPending, error } = useAppMutation<
     AuthCredentials,
@@ -16,7 +18,9 @@ export function useAuthSignIn() {
       saveAuthUser(auth);
     },
 
-    onError: (error) => console.log("Something goes wrong", error),
+    onError: () => {
+      show("Wrong credentials", "error");
+    },
   });
 
   return {

@@ -1,8 +1,9 @@
 import { Box, Icon, TouchableOpacityBox, Text } from "@components";
 import { IHectare } from "@domain";
-import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 import { useCartStore } from "src/store/useCartStore";
 import { useMapStore } from "src/store/useMapStore";
+import { useToastStore } from "src/store/useToastStore";
 
 export interface PlotsCardProps {
   code: string;
@@ -17,13 +18,18 @@ export interface PlotsCardProps {
 export function PlotsCard({ item }: { item: IHectare }) {
   const { addItem, items, removeItem } = useCartStore();
   const { selectHectare } = useMapStore();
-  const { t } = useTranslation();
+  const { show } = useToastStore();
 
   const isInCart = items.find((cartItem) => cartItem._id === item._id);
 
   const handleOpenPressMap = () => {
     selectHectare(item._id);
   };
+
+  function addToCart(item: IHectare) {
+    addItem(item);
+    show("Item added to cart", "info");
+  }
 
   return (
     <Box
@@ -55,12 +61,12 @@ export function PlotsCard({ item }: { item: IHectare }) {
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            {t("common.lat")}: {item.coordinates.lat.toFixed(4)}
+            Lat: {item.coordinates.lat.toFixed(4)}
           </Text>
 
           <Text fontSize={14} fontWeight={"700"} color={"charcoalGrey"} mt="s4">
             <Icon name={"map-marker-alt"} size={14} color="secondary" /> {"  "}
-            {t("common.lng")}: {item.coordinates.lng.toFixed(4)}
+            Lng: {item.coordinates.lng.toFixed(4)}
           </Text>
         </Box>
 
@@ -82,12 +88,12 @@ export function PlotsCard({ item }: { item: IHectare }) {
         alignItems="center"
         justifyContent="center"
         backgroundColor={isInCart ? "fbInfoSurface" : "primary"}
-        onPress={() => (isInCart ? removeItem(item._id) : addItem(item))}
+        onPress={() => (isInCart ? removeItem(item._id) : addToCart(item))}
       >
         <Text color="pureWhite" fontWeight="600" fontSize={14}>
           {isInCart
-            ? t("plots.remove_from_cart")
-            : t("plots.acquire", { price: item.value.toFixed(2) })}
+            ? "Remover do Carrinho"
+            : t("plots.acquire", { price: item.value })}
         </Text>
       </TouchableOpacityBox>
     </Box>

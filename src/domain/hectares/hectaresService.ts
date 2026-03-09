@@ -1,11 +1,12 @@
 import { api } from "src/api/apiInstance";
 import { PageParams } from "src/api/apiType";
 
-export const getAllHectares = async (params: PageParams) => {
+export const getAllHectares = async (params: PageParams, search?: string) => {
   const response = await api.get("/hectares", {
     params: {
       page: params.page,
       limit: params.limit,
+      search,
     },
   });
 

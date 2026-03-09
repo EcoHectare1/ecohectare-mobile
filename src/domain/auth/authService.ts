@@ -1,18 +1,12 @@
-import { email } from "zod/v4-mini";
-import { RegisterFormData } from "../../schemas/registerSchema";
 import { api } from "../../api/apiInstance";
 import { AuthSignUpParams } from "./authTypes";
 
 export const register = async (signUpData: AuthSignUpParams): Promise<void> => {
-  try {
-    await api.post("/auth/register", {
-      name: signUpData.name,
-      email: signUpData.email,
-      password: signUpData.password,
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  await api.post("/auth/register", {
+    name: signUpData.name,
+    email: signUpData.email,
+    password: signUpData.password,
+  });
 };
 
 export const verifyEmail = async (token: string) => {
@@ -21,16 +15,12 @@ export const verifyEmail = async (token: string) => {
 };
 
 export const login = async (email: string, password: string) => {
-  try {
-    const auth = await api.post("/auth/login", {
-      email,
-      password,
-    });
+  const auth = await api.post("/auth/login", {
+    email,
+    password,
+  });
 
-    return auth.data;
-  } catch (error) {
-    throw error;
-  }
+  return auth.data;
 };
 
 export const authService = { login, register, verifyEmail };

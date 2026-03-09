@@ -13,9 +13,16 @@ export interface UsePaginatedListResult<TData> {
   isRefetching: boolean;
 }
 
+interface PaginatedListOption {
+  enabled?: boolean;
+
+  staleTime?: number;
+}
+
 export function usePaginatedList<Data>(
   queryKey: readonly unknown[],
-  getList: (pageParam: number) => Promise<Page<Data>>
+  getList: (pageParam: number) => Promise<Page<Data>>,
+  options?: PaginatedListOption,
 ): UsePaginatedListResult<Data> {
   const query = useInfiniteQuery<Page<Data>>({
     queryKey,
@@ -30,6 +37,8 @@ export function usePaginatedList<Data>(
       }
       return null;
     },
+    enabled: options?.enabled,
+    staleTime: options?.staleTime,
   });
 
   const lastPage = query.data?.pages[query.data.pages.length - 1];
