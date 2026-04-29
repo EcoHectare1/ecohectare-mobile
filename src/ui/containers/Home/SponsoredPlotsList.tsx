@@ -3,6 +3,7 @@ import { FlatList, ListRenderItemInfo } from "react-native";
 import PlotItem, { PlotItemProps } from "./PlotItem";
 import { useAppTheme } from "@theme";
 import { Box, Text } from "@components";
+import { useTranslation } from "react-i18next";
 
 interface SponsoredPlotsListProps {
   data: any;
@@ -53,6 +54,7 @@ const lotes = [
 
 export const SponsoredPlotsList = () => {
   const { spacing } = useAppTheme();
+  const { t } = useTranslation();
   function renderItem({ item }: ListRenderItemInfo<PlotItemProps>) {
     return <PlotItem {...item} />;
   }
@@ -60,7 +62,7 @@ export const SponsoredPlotsList = () => {
   return (
     <Box flexDirection="column" gap="s14" mt="s32">
       <Text fontWeight={"800"} fontSize={20} color="primary">
-        Lotes Apadrinhados
+        {t("home.sponsored_plots")}
       </Text>
       <FlatList
         data={lotes}

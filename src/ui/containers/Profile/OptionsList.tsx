@@ -3,6 +3,7 @@ import { FlatList, ListRenderItemInfo } from "react-native";
 import { Button } from "@components";
 import { router } from "expo-router";
 import { useAppTheme } from "@theme";
+import { useTranslation } from "react-i18next";
 
 type MenuItem = {
   id: string;
@@ -12,29 +13,30 @@ type MenuItem = {
   value?: string;
 };
 
-const settingsMenuItems: MenuItem[] = [
-  {
-    id: "1",
-    iconName: "award",
-    title: "Meus certificados",
-    link: "CertificatesScreen",
-  },
-  {
-    id: "2",
-    iconName: "user-cog",
-    title: "Gerenciamento de conta",
-    link: "/account-management",
-  },
-  {
-    id: "3",
-    iconName: "globe",
-    title: "Idioma",
-    link: "LanguageSettingsScreen",
-    value: "Português",
-  },
-];
-
 const OptionsList = ({}) => {
+  const { t } = useTranslation();
+  const settingsMenuItems: MenuItem[] = [
+    {
+      id: "1",
+      iconName: "award",
+      title: t("profile.my_certificates"),
+      link: "CertificatesScreen",
+    },
+    {
+      id: "2",
+      iconName: "user-cog",
+      title: t("profile.account_management"),
+      link: "/account-management",
+    },
+    {
+      id: "3",
+      iconName: "globe",
+      title: t("profile.language"),
+      link: "/language-settings",
+      value: "Português",
+    },
+  ];
+
   const { spacing } = useAppTheme();
 
   function renderItem(item: ListRenderItemInfo<MenuItem>) {
@@ -74,7 +76,7 @@ function OptionItem({
 }) {
   return (
     <Button
-      textColor="primary"
+      textColor="black"
       icon={icon}
       title={title}
       onPress={() => router.push(link)}

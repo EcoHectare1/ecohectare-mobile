@@ -6,7 +6,9 @@ import { AuthProvider } from "../src/domain/auth/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useKeepAwake } from "expo-keep-awake";
+import "../src/utils/i18n";
 import { StyleSheet } from "react-native";
+import { Toast } from "@components";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,7 @@ export default function RootLayout() {
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <AppStack />
+            <Toast />
             <StatusBar style="dark" />
           </ThemeProvider>
         </AuthProvider>

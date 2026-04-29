@@ -8,17 +8,20 @@ export function Screen({
   scrollable = false,
   ...boxProps
 }: PropsWithChildren & BoxProps & { scrollable?: boolean }) {
-  const { bottom, top } = useAppSafeArea();
   const Container = scrollable ? ScrollView : View;
+  const { bottom, top } = useAppSafeArea();
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <Box
         flex={1}
-        paddingHorizontal={"padding"}
+        backgroundColor="background"
+        paddingHorizontal="padding"
+        style={{ paddingBottom: bottom, paddingTop: bottom + 10 }}
         {...boxProps}
-        backgroundColor="transparent"
-        style={[{ paddingTop: top }]}
       >
         <Container showsVerticalScrollIndicator={false}>{children}</Container>
       </Box>

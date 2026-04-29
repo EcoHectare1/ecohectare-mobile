@@ -1,7 +1,9 @@
 import { Box, Icon, TouchableOpacityBox, Text } from "@components";
 import { IHectare } from "@domain";
+import { t } from "i18next";
 import { useCartStore } from "src/store/useCartStore";
 import { useMapStore } from "src/store/useMapStore";
+import { useToastStore } from "src/store/useToastStore";
 
 export interface PlotsCardProps {
   code: string;
@@ -14,14 +16,20 @@ export interface PlotsCardProps {
 }
 
 export function PlotsCard({ item }: { item: IHectare }) {
-  const { addItem, items } = useCartStore();
+  const { addItem, items, removeItem } = useCartStore();
   const { selectHectare } = useMapStore();
+  const { show } = useToastStore();
 
   const isInCart = items.find((cartItem) => cartItem._id === item._id);
 
   const handleOpenPressMap = () => {
     selectHectare(item._id);
   };
+
+  function addToCart(item: IHectare) {
+    addItem(item);
+    show("Item added to cart", "info");
+  }
 
   return (
     <Box
@@ -80,12 +88,12 @@ export function PlotsCard({ item }: { item: IHectare }) {
         alignItems="center"
         justifyContent="center"
         backgroundColor={isInCart ? "fbInfoSurface" : "primary"}
-        onPress={() => addItem(item)}
+        onPress={() => (isInCart ? removeItem(item._id) : addToCart(item))}
       >
         <Text color="pureWhite" fontWeight="600" fontSize={14}>
           {isInCart
-            ? "No Carrinho"
-            : `Locar por R$ ${item.value.toFixed(2)}/mês`}
+            ? "Remover do Carrinho"
+            : t("plots.acquire", { price: item.value })}
         </Text>
       </TouchableOpacityBox>
     </Box>

@@ -11,13 +11,17 @@ import { useAppTheme } from "@theme";
 import { router } from "expo-router";
 import React from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useCartStore } from "src/store/useCartStore";
 import { CartItem } from "src/ui/containers/CartItem";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAppSafeArea } from "src/hooks/useAppSafeArea";
 
 const Cart = () => {
   const { spacing } = useAppTheme();
+  const { bottom } = useAppSafeArea();
   const { items, totalPrice } = useCartStore();
+  const { t } = useTranslation();
 
   function renderItem({ item }: ListRenderItemInfo<IHectare>) {
     return <CartItem {...item} />;
@@ -34,7 +38,7 @@ const Cart = () => {
         >
           <Icon name={"chevron-left"} size={20} />
           <Text color="black" fontSize={20}>
-            Carrinho
+            {t("cart.title")}
           </Text>
         </TouchableOpacityBox>
 
@@ -50,7 +54,7 @@ const Cart = () => {
           >
             <MaterialCommunityIcons name="cart-plus" size={60} color="black" />
             <Text color="primary" fontSize={16}>
-              Seu carrinho está vazio
+              {t("cart.empty")}
             </Text>
           </Box>
         ) : (
@@ -70,8 +74,8 @@ const Cart = () => {
       </Screen>
       <Box
         paddingHorizontal="s24"
-        pt="s10"
-        pb="s32"
+        paddingVertical="s14"
+        height={80 + bottom}
         borderTopWidth={1}
         borderColor="stoneGrey"
         flexDirection="row"
@@ -80,19 +84,22 @@ const Cart = () => {
       >
         <Box flexDirection="column" gap="s4">
           <Text color="gray2" fontSize={15}>
-            Total
+            {t("cart.total")}
           </Text>
           <Text color="primary" fontWeight={"700"} fontSize={20}>
             ${totalPrice.toFixed(2)}{" "}
-            <Text color="gray2">/ {items.length > 1 ? "itens" : "item"}</Text>
+            <Text color="gray2">
+              / {items.length > 1 ? t("cart.items") : t("cart.item")}
+            </Text>
           </Text>
         </Box>
 
         <Button
           textColor="pureWhite"
-          title="Continuar"
+          title={t("cart.continue")}
           backgroundColor="primary"
           width={"40%"}
+          height={50}
           justifyContent="center"
         />
       </Box>
